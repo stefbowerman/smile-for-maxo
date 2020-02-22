@@ -45,3 +45,10 @@ export function toPlainText (blocks) {
     })
     .join('\n\n')
 }
+
+export function formatPrice(price) {
+  price = Number.parseFloat(price).toFixed(2)
+  price = `$${price.replace('.00', '')}`
+
+  return price
+}

@@ -13,9 +13,8 @@ import BlogPostPreviewList from '../components/blog-post-preview-list'
 import Container from '../components/container'
 import GraphQLErrorList from '../components/graphql-error-list'
 import SEO from '../components/seo'
-import Layout from '../containers/layout'
 import Product from '../components/product'
-import PortableText from '../components/portableText'
+import Album from '../components/album'
 
 export const query = graphql`
   fragment SanityImage on SanityMainImage {
@@ -147,10 +146,10 @@ const IndexPage = props => {
     )
   }
 
-  console.log(Object.keys(albums[0].links))
+  console.log(products)
 
   return (
-    <Layout>
+    <React.Fragment>
       <SEO
         title={site.title}
         description={site.description}
@@ -158,25 +157,11 @@ const IndexPage = props => {
       />
       <Container>
         <h1 hidden>Welcome to {site.title}</h1>
-        {albums && albums.map((album, i) => (
-          <div>
-            <h3>{album.name}</h3>
-            <PortableText blocks={album._rawDescription} />
-            {album.image && album.image.asset && (
-              <img
-                src={imageUrlFor(buildImageObj(album.image))
-                  .width(600)
-                  .auto('format')
-                  .url()}
-                alt={album.image.alt}
-                key={`album-image-${i}`}
-              />
-            )}
-            <small><pre>{album.links && album.links.appleMusic}</pre></small>
-            <small><pre>{album.links && album.links.tidal}</pre></small>
-            <small><pre>{album.links && album.links.spotify}</pre></small>            
-          </div>
-        ))}         
+        <div>
+          {albums && albums.map((album, i) => (
+            <Album album={album} key={`album-${i}`} />
+          ))}
+        </div>
         <div>
           {products && products.map((product, i) => (
             <Product product={product} key={`product-${i}`} />
@@ -192,7 +177,7 @@ const IndexPage = props => {
           )
         */}
       </Container>
-    </Layout>
+    </React.Fragment>
   )
 }
 

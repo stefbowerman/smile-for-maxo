@@ -61,7 +61,7 @@ const BlogPostTemplate = props => {
   const {data, errors} = props
   const post = data && data.post
   return (
-    <Layout>
+    <React.Fragment>
       {errors && <SEO title='GraphQL Error' />}
       {post && <SEO title={post.title || 'Untitled'} description={toPlainText(post._rawExcerpt)} image={post.mainImage} />}
 
@@ -72,7 +72,7 @@ const BlogPostTemplate = props => {
       )}
 
       {post && <BlogPost {...post} />}
-    </Layout>
+    </React.Fragment>
   )
 }
 

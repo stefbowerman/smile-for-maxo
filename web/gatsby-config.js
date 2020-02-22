@@ -10,6 +10,7 @@ const isProd = process.env.NODE_ENV === 'production'
 module.exports = {
   plugins: [
     'gatsby-plugin-postcss',
+    'gatsby-plugin-sass',
     'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-source-sanity',
@@ -43,6 +44,12 @@ module.exports = {
         // // Defaults to ['shop', 'content'].
         // includeCollections: ["website"]
       }
+    },
+    {
+      resolve: `gatsby-plugin-layout`,
+      options: {
+        component: require.resolve(`./src/components/layout`),
+      },
     }
   ]
 }
