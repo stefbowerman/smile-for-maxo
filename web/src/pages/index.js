@@ -3,13 +3,19 @@ import {graphql} from 'gatsby'
 import {
   mapEdgesToNodes,
   filterOutDocsWithoutSlugs,
-  filterOutDocsPublishedInTheFuture
+  filterOutDocsPublishedInTheFuture,
+  buildImageObj,
+  cn,
+  getBlogUrl
 } from '../lib/helpers'
+import {imageUrlFor} from '../lib/image-url'
 import BlogPostPreviewList from '../components/blog-post-preview-list'
 import Container from '../components/container'
 import GraphQLErrorList from '../components/graphql-error-list'
 import SEO from '../components/seo'
 import Layout from '../containers/layout'
+import Product from '../components/product'
+import PortableText from '../components/portableText'
 
 export const query = graphql`
   fragment SanityImage on SanityMainImage {
@@ -39,6 +45,53 @@ export const query = graphql`
       title
       description
       keywords
+    }
+    shopifyCollection(handle: {eq: "website"}) {
+      products {
+        title
+        handle
+        images {
+          originalSrc
+        }
+        shopifyId
+        description
+        descriptionHtml
+        availableForSale
+        priceRange {
+          maxVariantPrice {
+            amount
+          }
+          minVariantPrice {
+            amount
+          }
+        } 
+       variants {
+          id
+          shopifyId
+          availableForSale
+          title
+        }
+      }
+    }
+    albums: allSanityAlbum {
+      edges {
+        node {
+          name
+          _rawDescription
+          slug {
+            current
+          }
+          image {
+            ...SanityImage
+            alt
+          }
+          links {
+            appleMusic
+            spotify
+            tidal
+          }          
+        }
+      }
     }
     posts: allSanityPost(
       limit: 6
@@ -81,12 +134,20 @@ const IndexPage = props => {
       .filter(filterOutDocsWithoutSlugs)
       .filter(filterOutDocsPublishedInTheFuture)
     : []
+  const products = (data || {}).shopifyCollection
+    ? data.shopifyCollection.products
+    : []
+  const albums = (data || {}).albums
+    ? mapEdgesToNodes(data.albums)
+    : []
 
   if (!site) {
     throw new Error(
       'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.'
     )
   }
+
+  console.log(Object.keys(albums[0].links))
 
   return (
     <Layout>
@@ -97,13 +158,39 @@ const IndexPage = props => {
       />
       <Container>
         <h1 hidden>Welcome to {site.title}</h1>
-        {postNodes && (
-          <BlogPostPreviewList
-            title='Latest blog posts'
-            nodes={postNodes}
-            browseMoreHref='/archive/'
-          />
-        )}
+        {albums && albums.map((album, i) => (
+          <div>
+            <h3>{album.name}</h3>
+            <PortableText blocks={album._rawDescription} />
+            {album.image && album.image.asset && (
+              <img
+                src={imageUrlFor(buildImageObj(album.image))
+                  .width(600)
+                  .auto('format')
+                  .url()}
+                alt={album.image.alt}
+                key={`album-image-${i}`}
+              />
+            )}
+            <small><pre>{album.links && album.links.appleMusic}</pre></small>
+            <small><pre>{album.links && album.links.tidal}</pre></small>
+            <small><pre>{album.links && album.links.spotify}</pre></small>            
+          </div>
+        ))}         
+        <div>
+          {products && products.map((product, i) => (
+            <Product product={product} key={`product-${i}`} />
+          ))}
+        </div>
+        {/*
+          postNodes && (
+            <BlogPostPreviewList
+              title='Latest blog posts'
+              nodes={postNodes}
+              browseMoreHref='/archive/'
+            />
+          )
+        */}
       </Container>
     </Layout>
   )

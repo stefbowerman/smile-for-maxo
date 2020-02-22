@@ -3,7 +3,8 @@ import MdSettings from 'react-icons/lib/md/settings'
 import {
   MdPerson,
   MdDescription,
-  MdLocalOffer
+  MdLocalOffer,
+  MdAlbum
 } from 'react-icons/lib/md'
 import IframePreview from '../previews/IframePreview'
 
@@ -58,6 +59,11 @@ export default () =>
         ),
       S.divider(),
       S.listItem()
+        .title('Albums')
+        .icon(MdAlbum)
+        .schemaType('album')
+        .child(S.documentTypeList('album').title('Albums')),      
+      S.listItem()
         .title('Blog posts')
         .icon(MdDescription)
         .schemaType('post')
@@ -77,7 +83,7 @@ export default () =>
       // defined the structure above.
       ...S.documentTypeListItems().filter(
         listItem =>
-          !['category', 'author', 'post', 'siteSettings'].includes(
+          !['album', 'category', 'author', 'post', 'siteSettings'].includes(
             listItem.getId()
           )
       )
