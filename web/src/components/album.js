@@ -22,6 +22,7 @@ const Album = ({ album }) => {
             .auto('format')
             .url()}
           alt={album.image.alt}
+          style={{ maxWidth: '100%' }}
         />
       )}
       <div>
