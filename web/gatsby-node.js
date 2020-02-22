@@ -46,6 +46,6 @@ async function createBlogPostPages (graphql, actions) {
     })
 }
 
-exports.createPages = async ({graphql, actions}) => {
-  await createBlogPostPages(graphql, actions)
-}
+// exports.createPages = async ({graphql, actions}) => {
+//   await createBlogPostPages(graphql, actions)
+// }
