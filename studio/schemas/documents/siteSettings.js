@@ -16,6 +16,11 @@ export default {
       description: 'Describe your blog for search engines and social media.'
     },
     {
+      name: 'socialLinks',
+      type: 'socialLinks',
+      title: 'Social Links'
+    },
+    {
       name: 'keywords',
       type: 'array',
       title: 'Keywords',

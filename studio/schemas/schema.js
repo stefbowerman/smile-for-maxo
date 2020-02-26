@@ -10,7 +10,10 @@ import category from './documents/category'
 import post from './documents/post'
 import album from './documents/album'
 import albumLinks from './documents/albumLinks'
+import socialLinks from './documents/socialLinks'
+import video from './documents/video'
 import siteSettings from './documents/siteSettings'
+import homePage from './documents/homePage'
 
 // Object types
 import bodyPortableText from './objects/bodyPortableText'
@@ -30,11 +33,14 @@ export default createSchema({
     // The following are document types which will appear
     // in the studio.
     siteSettings,
+    homePage,
     post,
     category,
     author,
     album,
     albumLinks,
+    socialLinks,
+    video,
     mainImage,
     authorReference,
     bodyPortableText,

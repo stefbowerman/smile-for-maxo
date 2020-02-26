@@ -1,36 +1,49 @@
-import {Link} from 'gatsby'
+import {Link, graphql, StaticQuery} from 'gatsby'
 import React from 'react'
 import Icon from './icon'
 import {cn} from '../lib/helpers'
 
 import styles from './header.module.css'
 
-const Header = ({onHideNav, onShowNav, showNav, siteTitle}) => (
-  <div className={styles.root}>
-    <div className={styles.wrapper}>
-      <div className={styles.branding}>
-        <Link to='/'>{siteTitle}</Link>
+const query = graphql`
+  query HeaderQuery {
+    collection: shopifyCollection(handle: {eq: "website"}) {
+      products {
+        handle
+      }
+    }
+  }
+`
+
+const Header = props => {
+  const hasProducts = !!(props.data.collection.products && props.data.collection.products.length)
+
+  return (
+    <header className={styles.root}>
+      <div className={styles.wrapper}>
+        <nav className={styles.nav}>
+          <ul>
+            <li>
+              <Link to='/videos/'>Videos</Link>
+            </li>
+            {hasProducts && 
+              <li>
+                <Link to='/merch/'>Merch</Link>
+              </li>
+            }        
+            <li>
+              <Link to='/music/'>Music</Link>
+            </li>
+          </ul>
+        </nav>
       </div>
+    </header>
+  )
+}
 
-      <button className={styles.toggleNavButton} onClick={showNav ? onHideNav : onShowNav}>
-        <Icon symbol='hamburger' />
-      </button>
-
-      <nav className={cn(styles.nav, showNav && styles.showNav)}>
-        <ul>
-          <li>
-            <Link to='/video/'>Video</Link>
-          </li> 
-          <li>
-            <Link to='/merch/'>Merch</Link>
-          </li>        
-          <li>
-            <Link to='/music/'>Music</Link>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
+export default props => (
+  <StaticQuery
+    query={query}
+    render={data => <Header data={data} {...props} />}
+  />
 )
-
-export default Header

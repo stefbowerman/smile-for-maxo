@@ -1,4 +1,3 @@
-
 export default {
   name: 'album',
   type: 'document',
@@ -20,14 +19,29 @@ export default {
       }
     },
     {
-      name: 'image',
+      name: 'coverImage',
       type: 'mainImage',
-      title: 'Image'
+      title: 'Cover Image'
     },
     {
       name: 'description',
       type: 'descriptionPortableText',
       title: 'Description'
+    },
+    {
+      name: 'releaseDate',
+      type: 'date',
+      title: 'Release date'
+    },
+    {
+      name: 'images',
+      type: 'array',
+      title: 'Images',
+      of: [
+        {
+          type: 'mainImage'
+        }
+      ]
     },
     {
       name:  'links',
@@ -39,7 +53,7 @@ export default {
     select: {
       title: 'name',
       subtitle: 'slug.current',
-      media: 'image'
+      media: 'coverImage'
     }
   }
 }

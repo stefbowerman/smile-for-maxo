@@ -1,5 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
+import get from 'lodash/get'
 // import PropTypes from "prop-types"
 // import { Link } from "gatsby"
 import client from "../api/shopify"
@@ -9,9 +10,7 @@ import styles from './miniCart.module.scss'
 const mapStateToProps = state => {
   const props = {
     checkout: state.checkout,
-    isOpen: state.isCartOpen,
-    lineItems: state.checkout.lineItems,
-    lineItemsSubtotalPriceAmount: state.checkout.lineItemsSubtotalPrice && state.checkout.lineItemsSubtotalPrice.amount
+    isOpen: state.isCartOpen
   }
 
   return props
@@ -66,11 +65,14 @@ class MiniCart extends React.Component {
   }
 
   render() {
+    const lineItems = get(this.props.checkout, 'lineItems', []);
+    const lineItemsSubtotalPriceAmount = get(this.props.checkout, 'lineItemsSubtotalPrice.amount', 0);
+
     return (
       <div style={ {position: 'fixed', top: 20, right: 20, padding: 100, border: '1px solid', backgroundColor: 'white', display: (this.props.isOpen ? 'block' : 'none')} }>
         <span onClick={this.handleCloseClick}>Close</span>
         <h3>Mini Cart</h3>
-        {this.props.lineItems.map((lineItem, i) => {
+        {lineItems.map((lineItem, i) => {
           return (
             <div key={i} className={styles.lineItem}>
               <div style={ {display: 'flex', flexDirection: 'row', padding: '10px 0'} }>
@@ -94,7 +96,7 @@ class MiniCart extends React.Component {
         })}
        <div>
           <a href={this.props.checkout.webUrl} className="button" style={ {width: '100%'} } target="_blank">
-            {formatPrice(this.props.lineItemsSubtotalPriceAmount)}  &nbsp; &ndash; &nbsp;  Checkout
+            {formatPrice(lineItemsSubtotalPriceAmount)}  &nbsp; &ndash; &nbsp;  Checkout
           </a>
         </div>        
       </div>      

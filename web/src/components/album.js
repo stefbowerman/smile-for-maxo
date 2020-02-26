@@ -9,22 +9,30 @@ import {
 } from '../lib/helpers'
 import {imageUrlFor} from '../lib/image-url'
 import PortableText from './portableText'
+import SanityImage from './sanityImage'
 
 const Album = ({ album }) => {
+  console.log(album)
   return (
     <div>
       <h3>{album.name}</h3>
       <PortableText blocks={album._rawDescription} />
-      {album.image && album.image.asset && (
+      {album.coverImage && album.coverImage.asset && (
         <img
-          src={imageUrlFor(buildImageObj(album.image))
+          src={imageUrlFor(buildImageObj(album.coverImage))
             .width(600)
             .auto('format')
             .url()}
-          alt={album.image.alt}
+          alt={album.coverImage.alt}
           style={{ maxWidth: '100%' }}
         />
       )}
+      {album.images && album.images.map((image, j) => {
+          return (
+            <SanityImage asset={image.asset} key={`album-i-${j}`} />
+          )
+        })
+      }
       <div>
         <small>
           {

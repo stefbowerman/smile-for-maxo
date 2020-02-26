@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import Client from "shopify-buy"
 import Header from './header'
+import Footer from './footer'
 import MiniCart from './miniCart'
 
 import '../styles/layout.css'
@@ -95,13 +96,11 @@ class Layout extends React.Component {
       <React.Fragment>
         <span style={ {position: 'fixed', top: 20, right: 20, zIndex: 10000} } onClick={() => { this.props.openCart() }}>Open Cart</span>
         <MiniCart />      
-        <Header siteTitle={siteTitle} onHideNav={onHideNav} onShowNav={onShowNav} showNav={showNav} />
-        <div className={styles.content}>{children}</div>
-        <footer className={styles.footer}>
-          <div className={styles.footerWrapper}>
-            &copy; MAXO
-          </div>
-        </footer>
+        <Header />
+        <div className={styles.content}>
+          {children}
+        </div>
+        <Footer />
       </React.Fragment>
     )
   }

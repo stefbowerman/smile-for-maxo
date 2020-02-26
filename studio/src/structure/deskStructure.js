@@ -4,7 +4,9 @@ import {
   MdPerson,
   MdDescription,
   MdLocalOffer,
-  MdAlbum
+  MdAlbum,
+  MdVideocam,
+  MdHome
 } from 'react-icons/lib/md'
 import IframePreview from '../previews/IframePreview'
 
@@ -49,7 +51,7 @@ export default () =>
     .title('Content')
     .items([
       S.listItem()
-        .title('Settings')
+        .title('Site Settings')
         .icon(MdSettings)
         .child(
           S.editor()
@@ -57,33 +59,47 @@ export default () =>
             .schemaType('siteSettings')
             .documentId('siteSettings')
         ),
+      S.listItem()
+        .title('Home Page')
+        .icon(MdHome)
+        .child(
+          S.editor()
+            .id('homePage')
+            .schemaType('homePage')
+            .documentId('homePage')
+        ),
       S.divider(),
       S.listItem()
         .title('Albums')
         .icon(MdAlbum)
         .schemaType('album')
-        .child(S.documentTypeList('album').title('Albums')),      
+        .child(S.documentTypeList('album').title('Albums')),
       S.listItem()
-        .title('Blog posts')
-        .icon(MdDescription)
-        .schemaType('post')
-        .child(S.documentTypeList('post').title('Blog posts')),
-      S.listItem()
-        .title('Authors')
-        .icon(MdPerson)
-        .schemaType('author')
-        .child(S.documentTypeList('author').title('Authors')),
-      S.listItem()
-        .title('Categories')
-        .icon(MdLocalOffer)
-        .schemaType('category')
-        .child(S.documentTypeList('category').title('Categories')),
+        .title('Videos')
+        .icon(MdVideocam)
+        .schemaType('video')
+        .child(S.documentTypeList('video').title('Videos')),
+      // S.listItem()
+      //   .title('Blog posts')
+      //   .icon(MdDescription)
+      //   .schemaType('post')
+      //   .child(S.documentTypeList('post').title('Blog posts')),
+      // S.listItem()
+      //   .title('Authors')
+      //   .icon(MdPerson)
+      //   .schemaType('author')
+      //   .child(S.documentTypeList('author').title('Authors')),
+      // S.listItem()
+      //   .title('Categories')
+      //   .icon(MdLocalOffer)
+      //   .schemaType('category')
+      //   .child(S.documentTypeList('category').title('Categories')),
       // `S.documentTypeListItems()` returns an array of all the document types
       // defined in schema.js. We filter out those that we have
       // defined the structure above.
       ...S.documentTypeListItems().filter(
         listItem =>
-          !['album', 'category', 'author', 'post', 'siteSettings'].includes(
+          !['album', 'video', 'category', 'author', 'post', 'homePage', 'siteSettings'].includes(
             listItem.getId()
           )
       )
