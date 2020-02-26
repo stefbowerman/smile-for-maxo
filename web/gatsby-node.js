@@ -9,16 +9,13 @@ const {format, isFuture} = require('date-fns')
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
   const typeDefs = `
-    type StringQueryOperatorInput {
-      eq: String
-    }
-    type SanitySocialLinksFilterInput {
-      instagram: StringQueryOperatorInput
-      twitter: StringQueryOperatorInput
-      tumblr: StringQueryOperatorInput
+    type SanitySocialLinks {
+      instagram: String
+      twitter: String
+      tumblr: String
     }
     type SanitySiteSettings {
-      socialLinks: SanitySocialLinksFilterInput
+      socialLinks: SanitySocialLinks
     }
 
     type ShopifyProductPriceRangeMinVariantPrice {
