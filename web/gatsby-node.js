@@ -9,7 +9,7 @@ const {format, isFuture} = require('date-fns')
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
   const typeDefs = `
-    type: StringQueryOperatorInput {
+    type StringQueryOperatorInput {
       eq: String
     }
     type SanitySocialLinksFilterInput {
