@@ -35,7 +35,9 @@ const VideosPage = props => {
         <h1 hidden>Videos</h1>
         <div>
           {videoNodes && videoNodes.map((videoNode, i) => (
-            <YouTubeEmbed url={videoNode.youtubeUrl} key={`yt-${i}`} />
+            <div style={{marginBottom: 30}}>
+              <YouTubeEmbed url={videoNode.youtubeUrl} key={`yt-${i}`} />
+            </div>
           ))}
         </div>
       </Container>

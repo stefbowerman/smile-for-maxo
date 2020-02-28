@@ -43,7 +43,9 @@
     "get-youtube-id": "^1.0.1",
     "lodash": "^4.17.15",
     "node-sass": "^4.13.1",
+    "react-id-swiper": "^2.4.0",
     "react-redux": "^7.2.0",
-    "shopify-buy": "^2.9.1"
+    "shopify-buy": "^2.9.1",
+    "swiper": "^5.3.1"
   }
 }

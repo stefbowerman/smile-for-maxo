@@ -2,8 +2,12 @@ import React from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
+import Swiper from 'react-id-swiper';
 import client from "../api/shopify"
 import { formatPrice } from '../lib/helpers'
+
+import 'swiper/css/swiper.min.css';
+import styles from './product.module.scss';
 
 const mapStateToProps = state => {
   const props = {
@@ -105,57 +109,82 @@ class Product extends React.Component {
 
   render() {
     const product = this.props.product
+    const images = product.images || []
+
+    const swiperParams = {
+      pagination: {
+        el: '.swiper-pagination',
+        type: 'bullets',
+        clickable: true
+      },
+      loop: images.length > 1,
+      watchOverflow: true
+    }
 
     return (
-      <div style={ {margin: '60px 0'} }>
-        <h4>
-          {product.title}
-          {" - "}{formatPrice(product.priceRange.minVariantPrice.amount)}
-          {this.state.available && (
-            <span> 👍</span>
-          )}          
-        </h4>
-        <div>
-          {
-            product.images.map((image, j) => {
-              return (
-                <img src={image.originalSrc} key={j} style={ {maxWidth: 400, margin: 0} } alt="" />
-              )
-            })
-          }
-        </div>          
-        <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
-        {product.availableForSale ?
+      <div className={styles.el}>
+        {images.length &&
           <div>
-            <select
-              onChange={this.handleSelectChange}
-              onBlur={this.handleSelectChange}
-              style={this.state.variants.length == 1 ? {display: 'none'} : {}}
-            >
-              {this.state.variants && this.state.variants.map((variant, j) => {
-                const forSale = variant.available || variant.availableForSale
-
-                return (
-                  <option
-                    key={`variant-option-${j}`}
-                    value={variant.id}
-                    disabled={!forSale}
-                  >
-                    { variant.title } {forSale ? '' : 'SOLD OUT'}
-                  </option>
-                )
-              })}
-            </select>
-            <button type="submit" onClick={this.handleAddToCart}>
-              { this.state.adding ? 'Adding' : 'Add to Cart' }
-            </button>
+            <Swiper {...swiperParams}>
+              {
+                images.map((image, j) => {
+                  return (
+                    <div key={`product-image-${j}`} style={ {textAlign: 'center'} }>
+                      <img src={image.originalSrc} key={j} style={ {maxWidth: 400, margin: 0} } alt="" />
+                    </div>
+                  )
+                })
+              }
+            </Swiper>
+            <div className="swiper-pagination" />
           </div>
-          :
-          <h4>Sold Out</h4>
         }
-        {this.state.selectedVariantId && (
-          <div style={ {fontSize: 11, fontFamilt: 'Courier', display: 'none'} }>{this.state.selectedVariantId}</div>
-        )}        
+        <div style={
+          {
+            maxWidth: 800,
+            margin: '0 auto',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+          }
+        }>  
+          <h4>
+            {product.title}
+          </h4>
+          <p>{formatPrice(product.priceRange.minVariantPrice.amount)}</p>
+          <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
+          {product.availableForSale ?
+            <div>
+              <select
+                onChange={this.handleSelectChange}
+                onBlur={this.handleSelectChange}
+                style={this.state.variants.length == 1 ? {display: 'none'} : {}}
+              >
+                {this.state.variants && this.state.variants.map((variant, j) => {
+                  const forSale = variant.available || variant.availableForSale
+
+                  return (
+                    <option
+                      key={`variant-option-${j}`}
+                      value={variant.id}
+                      disabled={!forSale}
+                    >
+                      { variant.title } {forSale ? '' : 'SOLD OUT'}
+                    </option>
+                  )
+                })}
+              </select>
+              <button type="submit" onClick={this.handleAddToCart}>
+                { this.state.adding ? 'Adding' : 'Add to Cart' }
+              </button>
+            </div>
+            :
+            <h4>Sold Out</h4>
+          }
+          {this.state.selectedVariantId && (
+            <div style={ {fontSize: 11, fontFamilt: 'Courier', display: 'none'} }>{this.state.selectedVariantId}</div>
+          )}
+        </div>     
       </div>      
     )
   }

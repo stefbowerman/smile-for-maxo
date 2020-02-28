@@ -52,13 +52,11 @@ const MerchPage = props => {
   return (
     <React.Fragment>
       <SEO title='Merch' />
-      <Container>
-        <div>
-          {products && products.map((product, i) => (
-            <Product product={product} key={`product-${i}`} />
-          ))}
-        </div>
-      </Container>
+      <div>
+        {products && products.map((product, i) => (
+          <Product product={product} key={`product-${i}`} />
+        ))}
+      </div>
     </React.Fragment>
   )
 }

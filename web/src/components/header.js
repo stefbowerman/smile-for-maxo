@@ -24,16 +24,16 @@ const Header = props => {
         <nav className={styles.nav}>
           <ul>
             <li>
+              <Link to='/'>Home</Link>
+            </li>          
+            <li>
               <Link to='/videos/'>Videos</Link>
             </li>
             {hasProducts && 
               <li>
                 <Link to='/merch/'>Merch</Link>
               </li>
-            }        
-            <li>
-              <Link to='/music/'>Music</Link>
-            </li>
+            }
           </ul>
         </nav>
       </div>

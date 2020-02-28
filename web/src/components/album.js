@@ -10,45 +10,56 @@ import {
 import {imageUrlFor} from '../lib/image-url'
 import PortableText from './portableText'
 import SanityImage from './sanityImage'
+import LilBigManVisualGuide from './lilBigManVisualGuide'
+import Container from './container'
 
 const Album = ({ album }) => {
-  console.log(album)
+  const slug = album.slug.current
+  const links = [];
+  const linkMap = {
+    appleMusic: 'Apple Music',
+    tidal: 'TIDAL',
+    spotify: 'Spotify'
+  }
+
+  if (album.links) {
+    for (let [key, value] of Object.entries(album.links)) {
+      if(value && linkMap.hasOwnProperty(key)) {
+        links.push(
+          <a href={value} target="_blank">{linkMap[key]}</a>
+        )
+      }
+    }
+  }
+
   return (
     <div>
-      <h3>{album.name}</h3>
-      <PortableText blocks={album._rawDescription} />
-      {album.coverImage && album.coverImage.asset && (
-        <img
-          src={imageUrlFor(buildImageObj(album.coverImage))
-            .width(600)
-            .auto('format')
-            .url()}
-          alt={album.coverImage.alt}
-          style={{ maxWidth: '100%' }}
-        />
-      )}
-      {album.images && album.images.map((image, j) => {
-          return (
-            <SanityImage asset={image.asset} key={`album-i-${j}`} />
-          )
-        })
+      <Container>
+        <h3 hidden>{album.name}</h3>
+        <PortableText blocks={album._rawDescription} />
+        {album.images && album.images.map((image, j) => {
+            return (
+              <SanityImage asset={image.asset} key={`album-i-${j}`} />
+            )
+          })
+        }
+        {links.length > 0 && 
+          <div>
+            Listen to "{album.name}" on
+            <ul>
+              {links.map((link, k) => {
+                  return (
+                    <li key={`album-link-${k}`}>{link}</li>
+                  )
+                })
+              }
+            </ul>
+          </div>
+        }
+      </Container>
+      {slug === 'lil-big-man' && 
+        <LilBigManVisualGuide />
       }
-      <div>
-        <small>
-          {
-            album.links && album.links.appleMusic &&
-              <a href={album.links.appleMusic} target="_blank">Apple Music</a>
-          }
-          {
-            album.links && album.links.tidal &&
-              <a href={album.links.tidal} target="_blank">TIDAL</a>
-          }
-          {
-            album.links && album.links.spotify &&
-              <a href={album.links.spotify} target="_blank">Spotify</a>
-          }
-        </small>
-      </div>
     </div>
   )
 }

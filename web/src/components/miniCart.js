@@ -69,9 +69,8 @@ class MiniCart extends React.Component {
     const lineItemsSubtotalPriceAmount = get(this.props.checkout, 'lineItemsSubtotalPrice.amount', 0);
 
     return (
-      <div style={ {position: 'fixed', top: 20, right: 20, padding: 100, border: '1px solid', backgroundColor: 'white', display: (this.props.isOpen ? 'block' : 'none')} }>
+      <div style={ {position: 'fixed', zIndex: 10000, top: 20, right: 20, padding: 20, border: '1px solid', backgroundColor: 'white', display: (this.props.isOpen ? 'block' : 'none')} }>
         <span onClick={this.handleCloseClick}>Close</span>
-        <h3>Mini Cart</h3>
         {lineItems.map((lineItem, i) => {
           return (
             <div key={i} className={styles.lineItem}>

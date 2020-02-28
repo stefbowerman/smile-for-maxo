@@ -6,7 +6,7 @@ import Header from './header'
 import Footer from './footer'
 import MiniCart from './miniCart'
 
-import '../styles/layout.css'
+import '../styles/layout.scss'
 import styles from './layout.module.css'
 
 // const Layout = ({children, onHideNav, onShowNav, showNav, siteTitle}) => (
