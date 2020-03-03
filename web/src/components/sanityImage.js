@@ -11,6 +11,7 @@ const builder = sanityImageUrl(clientConfig.sanity)
 
 const SanityImage = ({
   asset,
+  alt,
   dataset,
   projectId,
   width,
@@ -78,7 +79,7 @@ const SanityImage = ({
 
   return (
     // {asset && (
-        <img src={img.url()} alt="" {...rest} />
+        <img src={img.url()} alt={alt} {...rest} />
     //   )
     // }
   )
@@ -111,6 +112,8 @@ SanityImage.propTypes = {
     }),
     PropTypes.string,
   ]).isRequired,
+
+  alt: PropTypes.string,
 
   // You should preconfigure your builder with dataset and project id, but
   // these let you temporarily override them if you need to render assets

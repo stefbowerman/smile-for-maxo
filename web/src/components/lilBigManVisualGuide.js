@@ -34,6 +34,7 @@ const LilBigManVisualGuide = props => {
           <button>Download</button>
         </a>
       </p>
+      {props.open && <span>I'm open!</span>}
     </div>
   )
 }

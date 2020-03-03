@@ -6,7 +6,8 @@ export default {
     {
       name: 'name',
       type: 'string',
-      title: 'Name'
+      title: 'Name',
+      validation: Rule => Rule.required()
     },
     {
       name: 'slug',
@@ -31,12 +32,13 @@ export default {
     {
       name: 'releaseDate',
       type: 'date',
-      title: 'Release date'
+      title: 'Release date',
+      validation: Rule => Rule.required()
     },
     {
       name: 'images',
       type: 'array',
-      title: 'Images',
+      title: 'Additional Images',
       of: [
         {
           type: 'mainImage'

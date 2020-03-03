@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   mapEdgesToNodes,
   filterOutDocsWithoutSlugs,
@@ -32,33 +32,43 @@ const Album = ({ album }) => {
     }
   }
 
+  const [visualGuideOpen, setVisualGuideOpen] = useState(false);
+
   return (
     <div>
-      <Container>
-        <h3 hidden>{album.name}</h3>
-        <PortableText blocks={album._rawDescription} />
-        {album.images && album.images.map((image, j) => {
-            return (
-              <SanityImage asset={image.asset} key={`album-i-${j}`} />
-            )
-          })
+      <h3 hidden>{album.name}</h3>
+      <div style={ {display: 'flex', marginBottom: 60} }>
+        {album.coverImage && 
+          <SanityImage asset={album.coverImage.asset} alt={album.coverImage.alt} />
         }
-        {links.length > 0 && 
-          <div>
-            Listen to "{album.name}" on
-            <ul>
-              {links.map((link, k) => {
-                  return (
-                    <li key={`album-link-${k}`}>{link}</li>
-                  )
-                })
-              }
-            </ul>
-          </div>
-        }
-      </Container>
+        <div>
+          <PortableText blocks={album._rawDescription} />
+          {links.length > 0 && 
+            <div>
+              Listen to "{album.name}" on
+              <ul>
+                {links.map((link, k) => {
+                    return (
+                      <li key={`album-link-${k}`}>{link}</li>
+                    )
+                  })
+                }
+              </ul>
+            </div>
+          }
+        </div>
+      </div>
+      {album.images && album.images.map((image, j) => {
+          return (
+            <SanityImage asset={image.asset} alt={image.alt} key={`album-i-${j}`} />
+          )
+        })
+      }
       {slug === 'lil-big-man' && 
-        <LilBigManVisualGuide />
+        <div>
+          <LilBigManVisualGuide open={visualGuideOpen}/>
+          <button onClick={() => setVisualGuideOpen(true)}>Show guide</button>
+        </div>
       }
     </div>
   )

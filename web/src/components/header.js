@@ -24,7 +24,7 @@ const Header = props => {
         <nav className={styles.nav}>
           <ul>
             <li>
-              <Link to='/'>Home</Link>
+              <Link to='/'>Music</Link>
             </li>          
             <li>
               <Link to='/videos/'>Videos</Link>

@@ -69,14 +69,14 @@ class MiniCart extends React.Component {
     const lineItemsSubtotalPriceAmount = get(this.props.checkout, 'lineItemsSubtotalPrice.amount', 0);
 
     return (
-      <div style={ {position: 'fixed', zIndex: 10000, top: 20, right: 20, padding: 20, border: '1px solid', backgroundColor: 'white', display: (this.props.isOpen ? 'block' : 'none')} }>
+      <div style={ {position: 'fixed', zIndex: 10000, top: 40, right: 20, padding: 20, border: '1px solid', backgroundColor: 'white', display: (this.props.isOpen ? 'block' : 'none'), fontSize: '80%'} }>
         <span onClick={this.handleCloseClick}>Close</span>
         {lineItems.map((lineItem, i) => {
           return (
             <div key={i} className={styles.lineItem}>
               <div style={ {display: 'flex', flexDirection: 'row', padding: '10px 0'} }>
                 <div>
-                  <img src={lineItem.variant.image.src} style={ {width: 90, marginRight: 20} } alt={lineItem.variant.image.altText} />
+                  <img src={lineItem.variant.image.src} style={ {width: 60, marginRight: 20} } alt={lineItem.variant.image.altText} />
                 </div>
                 <div style={ {flex: 1, padding: '0 20px'}}>
                   <div style={ {fontWeight: 'bold', textTransform: 'uppercase'} }>{lineItem.title}</div>

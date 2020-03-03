@@ -9,13 +9,13 @@
 .wrapper {
   box-sizing: border-box;
   margin: 0 auto;
-  max-width: 960px;
-  padding: 1em;
+  /*max-width: 960px;*/
+  /*padding: 1em;*/
   display: flex;
 
-  @media (--media-min-small) {
+/*  @media (--media-min-small) {
     padding: 1.5em 1.5em;
-  }
+  }*/
 }
 
 .branding {
@@ -57,6 +57,7 @@
 }
 
 .nav {
+  width: 100%;
   position: fixed;
   /*display: none;*/
 
@@ -101,7 +102,8 @@
     @nest & ul {
       list-style: none;
       display: flex;
-      justify-content: flex-end;
+      /*justify-content: flex-end;*/
+      justify-content: space-between;      
     }
 
     @nest & ul li a {

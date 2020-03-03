@@ -5,6 +5,7 @@ import Client from "shopify-buy"
 import Header from './header'
 import Footer from './footer'
 import MiniCart from './miniCart'
+import MiniCartDisplay from './miniCartDisplay'
 
 import '../styles/layout.scss'
 import styles from './layout.module.css'
@@ -23,15 +24,16 @@ import styles from './layout.module.css'
 
 const mapStateToProps = (state) => {
   return {
-    checkout: state.checkout
+    // checkout: state.checkout
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     clientCreate: (data) => dispatch({ type: 'CLIENT_CREATED', payload: data }),
-    checkoutCreate: (data) => dispatch({ type: 'CHECKOUT_FOUND', payload: data }),
-    openCart: () => dispatch({ type: 'OPEN_CART' })
+    checkoutCreate: (data) => dispatch({ type: 'CHECKOUT_FOUND', payload: data })
+    // ,
+    // openCart: () => dispatch({ type: 'OPEN_CART' })
   }
 }
 
@@ -94,13 +96,13 @@ class Layout extends React.Component {
 
     return (
       <React.Fragment>
-        <span style={ {position: 'fixed', top: 20, right: 20, zIndex: 10000} } onClick={() => { this.props.openCart() }}>Open Cart</span>
-        <MiniCart />      
         <Header />
         <div className={styles.content}>
           {children}
         </div>
         <Footer />
+        <MiniCart />
+        <MiniCartDisplay />
       </React.Fragment>
     )
   }

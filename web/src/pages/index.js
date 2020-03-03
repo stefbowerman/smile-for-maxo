@@ -17,30 +17,9 @@ import Album from '../components/album'
 import SanityImage from '../components/sanityImage'
 import YouTubeEmbed from '../components/youTubeEmbed'
 import Container from '../components/container'
+import HeroImage from '../components/heroImage'
 
 export const query = graphql`
-  fragment SanityImage on SanityMainImage {
-    crop {
-      _key
-      _type
-      top
-      bottom
-      left
-      right
-    }
-    hotspot {
-      _key
-      _type
-      x
-      y
-      height
-      width
-    }
-    asset {
-      _id
-    }
-  }
-
   query IndexPageQuery {
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
       title
@@ -148,11 +127,9 @@ const IndexPage = props => {
         keywords={site.keywords}
       />
       <h1 hidden>Welcome to {site.title}</h1>
-      {homePage.image && (
-        <div style={ {height: '80vh', padding: '100px 40px'} }>
-          <SanityImage asset={homePage.image.asset} style={ {maxWidth: '100%', height: '100%', width: '100%', objectFit: 'contain'} }/>
-        </div>
-      )}
+      {homePage.image && 
+        <HeroImage image={homePage.image} />
+      }
       {homePage.video && homePage.video.youtubeUrl && (
         <Container>
           <YouTubeEmbed url={homePage.video.youtubeUrl} />

@@ -15,7 +15,8 @@ export default {
     {
       name: 'name',
       type: 'string',
-      title: 'Name'
+      title: 'Name',
+      validation: Rule => Rule.required()
     },
     {
       name: 'slug',
@@ -30,6 +31,22 @@ export default {
       name: 'youtubeUrl',
       type: 'url',
       title: 'YouTube URL'
+    },
+    {
+      name: 'releaseDate',
+      type: 'date',
+      title: 'Release date',
+      validation: Rule => Rule.required()
+    },
+    {
+      name: 'coverImage',
+      type: 'mainImage',
+      title: 'Cover Image'
+    },
+    {
+      name: 'caption',
+      type: 'descriptionPortableText',
+      title: 'Caption'
     }
   ],
   preview: {

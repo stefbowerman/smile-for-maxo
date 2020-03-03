@@ -23,12 +23,6 @@ const Footer = props => {
     <footer>
       <nav>
         <ul>
-          <li>
-            <Link to='#'>Contact</Link>
-          </li> 
-          <li>
-            <Link to='#'>About</Link>
-          </li>
           {instagramLink &&
             <li>
               <a href={instagramLink} target="_blank">Instagram</a>
