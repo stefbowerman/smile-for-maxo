@@ -2,6 +2,7 @@ import React from 'react'
 import {graphql} from 'gatsby'
 import Container from '../components/container'
 import SEO from '../components/seo'
+import HeroText from '../components/heroText'
 import Product from '../components/product'
 
 export const query = graphql`
@@ -52,6 +53,7 @@ const MerchPage = props => {
   return (
     <React.Fragment>
       <SEO title='Merch' />
+      <HeroText text="Merch" />
       <div>
         {products && products.map((product, i) => (
           <Product product={product} key={`product-${i}`} />

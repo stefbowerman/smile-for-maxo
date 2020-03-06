@@ -1,4 +1,26 @@
 .el {
-  margin: 60px 0;
+  padding: 60px 0;
   text-align: center;
+  overflow: hidden;
+}
+
+.image {
+  max-width: 800px;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.slide {
+  padding: 0 40px;
+}
+
+.swiperWrapper {
+  margin-left: -45vw;
+  margin-right: -45vw;
+
+  @media (min-width: 700px) {
+    margin-left: -20vw;
+    margin-right: -20vw;    
+  }
 }

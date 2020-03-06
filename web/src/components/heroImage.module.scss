@@ -1,11 +1,17 @@
 .el {
   height: 100vh;
   padding: 50px 20px;
+  opacity: 0;
 
   @media (min-width: 800px) {
     padding-top: 100px;
     padding-bottom: 100px;
   }
+}
+
+.elReady {
+  opacity: 1;
+  transition: opacity 1200ms ease-out 500ms;
 }
 
 .image {

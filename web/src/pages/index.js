@@ -36,10 +36,13 @@ export const query = graphql`
       }
       video {
         name
-        slug {
-          current
-        }
         youtubeUrl
+        releaseDate
+        _rawCaption
+        coverImage {
+          ...SanityImage
+          alt
+        }
       }
     }
     albums: allSanityAlbum(sort: {order: DESC, fields: releaseDate}){
@@ -91,6 +94,10 @@ export const query = graphql`
   }
 `
 
+const IndexContainer = ({ children }) => {
+  return <div className="index-container">{ children }</div>
+}
+
 const IndexPage = props => {
   const {data, errors} = props
 
@@ -131,15 +138,20 @@ const IndexPage = props => {
         <HeroImage image={homePage.image} />
       }
       {homePage.video && homePage.video.youtubeUrl && (
-        <Container>
-          <YouTubeEmbed url={homePage.video.youtubeUrl} />
-        </Container>
+        <IndexContainer>
+          <Container>
+            <YouTubeEmbed
+              url={homePage.video.youtubeUrl}
+              coverImage={homePage.video.coverImage}
+            />
+          </Container>
+        </IndexContainer>
       )}
-      <div>
-        {albums && albums.map((album, i) => (
-          <Album album={album} key={`album-${i}`} />
-        ))}
-      </div>
+      {albums && albums.map((album, i) => (
+        <IndexContainer key={`album-${i}`}>
+          <Album album={album} />
+        </IndexContainer>
+      ))}
 
 
       {/*

@@ -1,3 +1,5 @@
+@import '../styles/variables.scss';
+
 .el {
   position: fixed;
   bottom: 10px;
@@ -6,6 +8,7 @@
   padding: 10px 20px;
   color: white;
   mix-blend-mode: difference;
+  font-size: 24px;
 
   pointer-events: none;
   opacity: 0;
@@ -19,8 +22,11 @@
 }
 
 .count {
+  font-family: $font-family-script;
+  font-size: 75px;
+  line-height: 20px;
   position: absolute;
   top: 0;
   left: 0;
-  transform: translate(7px, -4px);
+  transform: translate(10px, 0);
 }

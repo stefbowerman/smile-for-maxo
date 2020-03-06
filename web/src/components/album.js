@@ -37,37 +37,41 @@ const Album = ({ album }) => {
   return (
     <div>
       <h3 hidden>{album.name}</h3>
-      <div style={ {display: 'flex', marginBottom: 60} }>
-        {album.coverImage && 
-          <SanityImage asset={album.coverImage.asset} alt={album.coverImage.alt} />
-        }
-        <div>
-          <PortableText blocks={album._rawDescription} />
-          {links.length > 0 && 
-            <div>
-              Listen to "{album.name}" on
-              <ul>
-                {links.map((link, k) => {
-                    return (
-                      <li key={`album-link-${k}`}>{link}</li>
-                    )
-                  })
-                }
-              </ul>
-            </div>
-          }
+      <Container>
+        <div style={ {display: 'flex', marginBottom: 60} }>
+          <div style={ {flex: 1} }>
+            {album.coverImage && 
+              <SanityImage asset={album.coverImage.asset} alt={album.coverImage.alt} />
+            }
+          </div>
+          <div style={ {flex: 1, padding: '0 30px'} }>
+            <PortableText blocks={album._rawDescription} />
+            {links.length > 0 && 
+              <div>
+                Listen to "{album.name}" on
+                <ul>
+                  {links.map((link, k) => {
+                      return (
+                        <li key={`album-link-${k}`}>{link}</li>
+                      )
+                    })
+                  }
+                </ul>
+              </div>
+            }
+          </div>
         </div>
-      </div>
-      {album.images && album.images.map((image, j) => {
-          return (
-            <SanityImage asset={image.asset} alt={image.alt} key={`album-i-${j}`} />
-          )
-        })
-      }
+        {album.images && album.images.map((image, j) => {
+            return (
+              <SanityImage asset={image.asset} alt={image.alt} key={`album-i-${j}`} />
+            )
+          })
+        }
+      </Container>
       {slug === 'lil-big-man' && 
         <div>
           <LilBigManVisualGuide open={visualGuideOpen}/>
-          <button onClick={() => setVisualGuideOpen(true)}>Show guide</button>
+          <button style={{display: 'none'}} onClick={() => setVisualGuideOpen(true)}>Show guide</button>
         </div>
       }
     </div>

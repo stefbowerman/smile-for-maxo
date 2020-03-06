@@ -1,0 +1,21 @@
+.el {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: 'The Broadband';
+  font-size: 75px;
+  text-transform: lowercase;
+
+  @media (min-width: 800px) {
+    font-size: 100px;
+  }
+
+  opacity: 0;
+}
+
+.elMounted {
+  transition: opacity 1200ms cubic-bezier(0.43, 0.18, 0.6, 0.93) 500ms;
+  opacity: 1;
+}

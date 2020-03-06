@@ -98,6 +98,8 @@
 
   /*@media (--media-min-small) {*/
     display: block;
+    padding-left: 15px;
+    padding-right: 15px;
 
     @nest & ul {
       list-style: none;

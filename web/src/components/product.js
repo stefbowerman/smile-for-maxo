@@ -118,19 +118,21 @@ class Product extends React.Component {
         clickable: true
       },
       loop: images.length > 1,
-      watchOverflow: true
+      watchOverflow: true,
+      slidesPerView: 3,
+      centeredSlides: true
     }
 
     return (
       <div className={styles.el}>
         {images.length &&
-          <div>
+          <div className={styles.swiperWrapper}>
             <Swiper {...swiperParams}>
               {
                 images.map((image, j) => {
                   return (
-                    <div key={`product-image-${j}`} style={ {textAlign: 'center'} }>
-                      <img src={image.originalSrc} key={j} style={ {maxWidth: 400, margin: 0} } alt="" />
+                    <div className={styles.slide} key={`product-image-${j}`} style={ {textAlign: 'center'} }>
+                      <img src={image.originalSrc} key={j} className={styles.image} alt="" />
                     </div>
                   )
                 })

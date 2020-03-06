@@ -1,11 +1,11 @@
 import React from 'react'
 
-const VideoPreview = props => {
-  console.log(props)
-  return (
-    <pre>{JSON.stringify(props, null, 2)}</pre>
-  )
-}
+// const VideoPreview = props => {
+//   console.log(props)
+//   return (
+//     <pre>{JSON.stringify(props, null, 2)}</pre>
+//   )
+// }
 
 export default {
   name: 'video',
@@ -48,12 +48,13 @@ export default {
       type: 'descriptionPortableText',
       title: 'Caption'
     }
-  ],
-  preview: {
-    select: {
-      title: 'name',
-      subtitle: 'youtubeUrl'
-    },
-    component: VideoPreview
-  }
+  ]
+  // ,
+  // preview: {
+  //   select: {
+  //     title: 'name',
+  //     subtitle: 'youtubeUrl'
+  //   },
+  //   component: VideoPreview
+  // }
 }

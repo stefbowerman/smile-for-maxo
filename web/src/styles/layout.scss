@@ -1,5 +1,10 @@
 @import './custom-properties.css';
 
+@font-face {
+  font-family: "The Broadband";
+  src: url("../fonts/the-broadband.woff2");
+}
+
 html {
   font-family: var(--font-family-sans);
   font-size: var(--font-base-size);
@@ -33,6 +38,7 @@ footer {
   flex-direction: column;
   align-items: center;
   padding: 100px 0;
+  background: var(--color-white);
 
   ul {
     list-style: none;
@@ -56,4 +62,12 @@ button {
 
 .swiper-pagination-bullet-active {
   background: #000 !important;
+}
+
+.index-container {
+  padding: 100px 0 100px;
+
+  @media (min-width: 900px) {
+    padding-top: 300px;
+  }
 }

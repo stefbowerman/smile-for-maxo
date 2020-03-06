@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 import get from 'lodash/get'
 // import PropTypes from "prop-types"
 // import { Link } from "gatsby"
+import { cn } from '../lib/helpers'
 import client from "../api/shopify"
 import { formatPrice } from '../lib/helpers'
 import styles from './miniCart.module.scss'
@@ -58,9 +59,9 @@ class MiniCart extends React.Component {
       //   cartInProgress: false
       // })
 
-      // if(checkout.lineItems.length === 0) {
-      //   navigate('/shop/')
-      // }
+      if(checkout.lineItems.length === 0) {
+        this.props.closeCart();
+      }
     });    
   }
 
@@ -69,7 +70,7 @@ class MiniCart extends React.Component {
     const lineItemsSubtotalPriceAmount = get(this.props.checkout, 'lineItemsSubtotalPrice.amount', 0);
 
     return (
-      <div style={ {position: 'fixed', zIndex: 10000, top: 40, right: 20, padding: 20, border: '1px solid', backgroundColor: 'white', display: (this.props.isOpen ? 'block' : 'none'), fontSize: '80%'} }>
+      <div className={cn(styles.el, (this.props.isOpen && styles.elOpen))}>
         <span onClick={this.handleCloseClick}>Close</span>
         {lineItems.map((lineItem, i) => {
           return (
@@ -80,13 +81,12 @@ class MiniCart extends React.Component {
                 </div>
                 <div style={ {flex: 1, padding: '0 20px'}}>
                   <div style={ {fontWeight: 'bold', textTransform: 'uppercase'} }>{lineItem.title}</div>
-                  { formatPrice(lineItem.variant.price) }
+                  <span>{ formatPrice(lineItem.variant.price) }</span>
                   { lineItem.quantity > 1 && <div>Qty: {lineItem.quantity}</div>}
-                  { lineItem.variant.selectedOptions.map((option, i) => {
-                    return (
+                  { lineItem.variant.selectedOptions.map((option, i) => (
+                    option.value !== 'Default Title' &&
                       <div key={i}>{option.name}: {option.value}</div>
-                    )
-                  })}
+                  ))}
                   <div><span className={styles.lineItemRemove} onClick={() => this.handleRemoveClick(lineItem.id) }>&times; &nbsp;Remove</span></div>
                 </div>
               </div>
@@ -94,8 +94,8 @@ class MiniCart extends React.Component {
           )
         })}
        <div>
-          <a href={this.props.checkout.webUrl} className="button" style={ {width: '100%'} } target="_blank">
-            {formatPrice(lineItemsSubtotalPriceAmount)}  &nbsp; &ndash; &nbsp;  Checkout
+          <a href={this.props.checkout.webUrl} style={ {width: '100%'} } target="_blank">
+            <button style={ {width: '100%'} }>{formatPrice(lineItemsSubtotalPriceAmount)}  &nbsp; &ndash; &nbsp;  Checkout</button>
           </a>
         </div>        
       </div>      

@@ -57,7 +57,14 @@
 .coverText {
   position: absolute;
   z-index: 1;
-  bottom: 13px;
-  left: 20px;
-  color: white
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  opacity: 0;
+  transition: opacity 500ms ease-out;
+}
+
+.coverTextVisible {
+  opacity: 0.8;
 }

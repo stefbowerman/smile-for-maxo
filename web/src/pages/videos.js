@@ -3,6 +3,7 @@ import {graphql} from 'gatsby'
 import {mapEdgesToNodes} from '../lib/helpers'
 import Container from '../components/container'
 import SEO from '../components/seo'
+import HeroText from '../components/heroText'
 import YouTubeEmbed from '../components/youTubeEmbed'
 import PortableText from '../components/portableText'
 
@@ -37,6 +38,7 @@ const VideosPage = props => {
   const onPlay = (index) => {
     console.log('playing!')
     console.log(index);
+    document.body.style.backgroundColor = '#000'
   }
 
   const videoNodes = data && data.videos && mapEdgesToNodes(data.videos)
@@ -44,6 +46,7 @@ const VideosPage = props => {
   return (
     <React.Fragment>
       <SEO title='Videos' />
+      <HeroText text="Videos" />
       <Container>
         <h1 hidden>Videos</h1>
         <div>
@@ -53,7 +56,7 @@ const VideosPage = props => {
               <YouTubeEmbed
                 url={video.youtubeUrl}
                 coverImage={video.coverImage}
-                onPlay={() => {onPlay(i)}}
+                onPlay={onPlay.bind(this, i)}
               />
               <small style={{marginTop: 100, display: 'block', maxWidth: '20em'}}>
                 <PortableText blocks={video._rawCaption} />

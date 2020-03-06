@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from "prop-types"
 // import {buildImageObj} from '../lib/helpers'
 // import {imageUrlFor} from '../lib/image-url'
 import clientConfig from '../../client-config'
 import sanityImageUrl from '@sanity/image-url'
+import { cn } from '../lib/helpers'
 
 const builder = sanityImageUrl(clientConfig.sanity)
 
@@ -37,6 +38,8 @@ const SanityImage = ({
   fit,
   dpr,
   ignoreImageParams,
+  onLoad,
+  onError,
   ...rest
 }) => {
   const img = Object.entries({
@@ -75,11 +78,24 @@ const SanityImage = ({
     builder.image(asset)
   )
 
+  const [loaded, setLoaded] = useState(false) // What to do with this?
+
   // const imgObj = buildImageObj(image)
 
   return (
     // {asset && (
-        <img src={img.url()} alt={alt} {...rest} />
+        <img
+          src={img.url()}
+          alt={alt}
+          {...rest} 
+          onLoad={() => {
+            setLoaded(true)
+            onLoad && onLoad()
+          }}
+          onError={() => {
+            onError && onError()
+          }}
+          />
     //   )
     // }
   )

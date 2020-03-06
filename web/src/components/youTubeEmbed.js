@@ -8,12 +8,14 @@ import SanityImage from './sanityImage'
 
 const YouTubeEmbed = props => {
   const [player, setPlayer] = useState(null)
-  const [ready, setReady] = useState(false)  // TODO - This needs to be player ready AND cover image ready
+  const [playerReady, setPlayerReady] = useState(false)
   const [playing, setPlaying] = useState(false)
+  const [coverLoaded, setCoverLoaded] = useState(false)
+  const [textVisible, setTextVisible] = useState(true)
 
   const onReady = (e) => {
     // console.log(e)
-    setReady(true)
+    setPlayerReady(true)
     setPlayer(e.target)
   }
 
@@ -24,13 +26,20 @@ const YouTubeEmbed = props => {
 
   const onEnd = e => {
     setPlaying(false)
+    setTextVisible(true);
     console.log('end!')
   }
 
+  const onCoverDone = e => {
+    setCoverLoaded(true)
+  }
+
   const onCoverClick = () => {
-    console.log('click!');
-    console.log(player)
-    player && player.seekTo(0) && player.playVideo();
+    if(player) {
+      player.seekTo(0)
+      player.playVideo()
+      setTextVisible(false);
+    }
   }
 
   const embedOptions = {
@@ -38,24 +47,30 @@ const YouTubeEmbed = props => {
     rel: 0
   }
 
-   return (
-    <div className={cn(styles.embed, (ready && styles.embedReady))}>
+  return (
+    <div className={cn(styles.embed, (
+      playerReady &&
+      (!props.coverImage || coverLoaded) && // If there's a cover image, we need to wait until it's loaded
+      styles.embedReady
+    ))}>
       {
         props.coverImage && 
         <div
           className={styles.cover}
-          onClick={() => {onCoverClick()}}
+          onClick={onCoverClick}
           style={ {
             opacity: (playing ? 0 : 1),
             pointerEvents: (playing ? 'none' : 'auto'),
             transition: 'opacity 800ms ease'
           } }    
         >
-          <span className={styles.coverText}>Watch</span>
+          <span className={cn(styles.coverText, (textVisible && styles.coverTextVisible))}>Watch</span>
           <SanityImage
             asset={props.coverImage.asset}
             className={styles.coverImage}
             alt={props.coverImage.alt}
+            onLoad={onCoverDone}
+            onError={onCoverDone}
           />
         </div>
       }
@@ -74,7 +89,7 @@ export default YouTubeEmbed
 
 YouTubeEmbed.propTypes = {
   url: PropTypes.string.isRequired,
-  onPlay: PropTypes.function,
+  onPlay: PropTypes.func,
   coverImage: PropTypes.shape({
     asset: PropTypes.object,
     alt: PropTypes.string
