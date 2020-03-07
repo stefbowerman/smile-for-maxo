@@ -160,7 +160,13 @@ class Product extends React.Component {
               <select
                 onChange={this.handleSelectChange}
                 onBlur={this.handleSelectChange}
-                style={this.state.variants.length == 1 ? {display: 'none'} : {}}
+                style={
+                  {
+                    display: this.state.variants.length == 1 ? 'none' : 'block',
+                    fontSize: 16,
+                    margin: '2rem 0'
+                  }
+                }
               >
                 {this.state.variants && this.state.variants.map((variant, j) => {
                   const forSale = variant.available || variant.availableForSale

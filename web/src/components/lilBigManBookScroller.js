@@ -99,16 +99,25 @@ class LilBigManBookScroller extends React.Component {
           zIndex: 10001,
           pointerEvents: (this.props.open ? 'auto' : 'none'),
           opacity: (this.props.open ? 1 : 0),
-          transition: 'opacity 300ms ease'
+          transition: 'opacity 300ms ease',
+          display: 'flex',
+          alignItems: 'center'
         }
       }>
-        <div style={{padding: '0 20px', display: 'flex', justifyContent: 'space-between'}}>
-          <p>Lil Big Man Book</p>
-          <p>
-            <span onClick={() => {
-              this.props.onCloseClick && this.props.onCloseClick()
-            }}>Close</span>
-          </p>
+        <div style={{
+          padding: '0 20px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '7vh'
+        }}>
+          <span>Lil Big Man Book</span>
+          <span onClick={() => {
+            this.props.onCloseClick && this.props.onCloseClick()
+          }}>Close</span>
         </div>
         <div style={
           {

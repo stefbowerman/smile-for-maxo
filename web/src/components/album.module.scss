@@ -1,0 +1,16 @@
+.top {
+  margin-bottom: 60px;
+
+  @media (min-width: 700px) {
+    display: flex;
+  }
+}
+
+.description {
+  margin: 150px 0 300px;
+
+  @media (min-width: 700px) {
+    margin: 0;
+    padding-left: 30px;
+  }
+}

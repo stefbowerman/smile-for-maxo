@@ -18,23 +18,6 @@
   }*/
 }
 
-.branding {
-  font-weight: 600;
-  flex: 1;
-
-  @nest & a {
-    display: inline-block;
-    padding: 0.5em;
-    color: inherit;
-    text-decoration: none;
-
-    @media (hover: hover) {
-      @nest &:hover {
-        color: var(--color-accent);
-      }
-    }
-  }
-}
 
 .toggleNavButton {
   appearance: none;

@@ -33,6 +33,10 @@ img {
   max-width: 100%;
 }
 
+p {
+  margin: 0 0 1rem;
+}
+
 footer {
   display: flex;
   flex-direction: column;
@@ -57,7 +61,8 @@ button {
   background-color: white;
   border: 1px solid black;
   border-radius: 2px;
-  padding: 4px 10px 5px;
+  font-size: 13px;
+  padding: 8px 25px 9px;
 }
 
 .swiper-pagination-bullet-active {
@@ -69,5 +74,65 @@ button {
 
   @media (min-width: 900px) {
     padding-top: 300px;
+  }
+}
+
+
+// Lil big man slideshow
+.lbm-slideshow {
+  position: relative;
+  background-color: black;
+  height: 900px;
+  max-height: 100vh;
+  display: flex;
+  align-items: center;
+
+  .swiper-container {
+    height: 100%;
+  }
+
+  .swiper-wrapper {
+    align-items: center;
+    transition-timing-function: cubic-bezier(.31,.3,.06,.93);
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: white;
+  }
+
+  .slide-image-wrap {
+    &:first-child {
+      img {
+        margin-left: auto;
+      }
+    }
+
+    &:last-child {
+      img {
+        margin-right: auto;
+      }
+    }
+  }
+
+  img {
+    display: block;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  // .swiper-pagination-bullet {
+  //   background: #bbb !important;
+  // }
+  // .swiper-pagination-bullet-active {
+  //   background-color: #686868 !important;
+  // }
+
+  .status {
+    font-size: 13px;
+    color: white;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
   }
 }
