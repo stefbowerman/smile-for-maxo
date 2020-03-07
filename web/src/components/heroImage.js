@@ -5,7 +5,7 @@ import { cn } from '../lib/helpers'
 import styles from './heroImage.module.scss'
 
 const HeroImage = ({ image }) => {
-  const [ready, setReady] = useState(false)
+  const [ready, setReady] = useState(true) // useState(false)
 
   return (
     <div className={cn(styles.el, (ready && styles.elReady))} >
@@ -14,7 +14,7 @@ const HeroImage = ({ image }) => {
         alt={image.alt}
         className={styles.image}
         onLoad={() => {
-          setReady(true)
+          // setReady(true)
         }}
       />
     </div>

@@ -10,7 +10,7 @@ const YouTubeEmbed = props => {
   const [player, setPlayer] = useState(null)
   const [playerReady, setPlayerReady] = useState(false)
   const [playing, setPlaying] = useState(false)
-  const [coverLoaded, setCoverLoaded] = useState(false)
+  const [coverLoaded, setCoverLoaded] = useState(true) // useState(false)
   const [textVisible, setTextVisible] = useState(true)
 
   const onReady = (e) => {
@@ -69,7 +69,7 @@ const YouTubeEmbed = props => {
             asset={props.coverImage.asset}
             className={styles.coverImage}
             alt={props.coverImage.alt}
-            onLoad={onCoverDone}
+            // onLoad={onCoverDone}
             onError={onCoverDone}
           />
         </div>
