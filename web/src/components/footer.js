@@ -1,6 +1,7 @@
 import {Link, graphql, StaticQuery} from 'gatsby'
 import React from 'react'
 import get from 'lodash/get'
+import styles from './footer.module.scss'
 
 const query = graphql`
   query FooterQuery {
@@ -18,9 +19,16 @@ const Footer = props => {
   const instagramLink = get(props, 'data.site.socialLinks.instagram')
   const tumblrLink = get(props, 'data.site.socialLinks.tumblr')
   const twitterLink = get(props, 'data.site.socialLinks.twitter')
+  const pathname = props.pathname
 
   return (
     <footer>
+      {
+        pathname !== '/' && 
+        <Link to="/" className={styles.homeLink}>
+          <button>Go Home</button>
+        </Link>
+      }
       <nav>
         <ul>
           {instagramLink &&
@@ -40,7 +48,9 @@ const Footer = props => {
           }   
         </ul>
       </nav>
-      <p>&copy; MAXO</p>
+      <Link to="/">
+        <img className={styles.logo} src={`/logo-small-trans.png`} />
+      </Link>
     </footer>
   )
 }

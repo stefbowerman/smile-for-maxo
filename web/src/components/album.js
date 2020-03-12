@@ -37,8 +37,8 @@ const Album = ({ album }) => {
 
   return (
     <div>
-      <h3 hidden>{album.name}</h3>
       <Container>
+        <h3>"{album.name}"</h3>
         <div className={styles.top}>
           <div style={ {flex: 1} }>
             {album.coverImage && 

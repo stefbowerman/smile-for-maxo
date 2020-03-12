@@ -12,15 +12,19 @@
 }
 
 .slide {
-  padding: 0 40px;
+  padding: 0 10px;
+
+  @media (min-width: 700px) {
+    padding: 0 40px; // ??
+  }
 }
 
 .swiperWrapper {
-  margin-left: -45vw;
-  margin-right: -45vw;
+  // margin-left: -45vw;
+  // margin-right: -45vw;
 
-  @media (min-width: 700px) {
-    margin-left: -20vw;
-    margin-right: -20vw;    
-  }
+  // @media (min-width: 700px) {
+  //   margin-left: -20vw;
+  //   margin-right: -20vw;    
+  // }
 }

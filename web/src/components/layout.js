@@ -93,14 +93,14 @@ class Layout extends React.Component {
 
   render() {
     const {children, onHideNav, onShowNav, showNav, siteTitle} = this.props
-
+    console.log(this.props.location)
     return (
       <React.Fragment>
         <Header />
         <div className={styles.content}>
           {children}
         </div>
-        <Footer />
+        <Footer pathname={this.props.location && this.props.location.pathname}/>
         <MiniCart />
         <MiniCartDisplay />
       </React.Fragment>

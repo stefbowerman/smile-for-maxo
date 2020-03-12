@@ -4,8 +4,7 @@ import {mapEdgesToNodes} from '../lib/helpers'
 import Container from '../components/container'
 import SEO from '../components/seo'
 import HeroText from '../components/heroText'
-import YouTubeEmbed from '../components/youTubeEmbed'
-import PortableText from '../components/portableText'
+import Video from '../components/video'
 
 export const query = graphql`
   query VideosPageQuery {
@@ -47,24 +46,12 @@ const VideosPage = props => {
     <React.Fragment>
       <SEO title='Videos' />
       <HeroText text="Videos" />
-      <Container>
-        <h1 hidden>Videos</h1>
-        <div>
-          {videoNodes && videoNodes.map((video, i) => (
-            <div style={{marginBottom: 380}} key={`yt-${i}`} >
-              <h3 style={{marginBottom: 200}}>&ldquo;{video.name}&rdquo;</h3>
-              <YouTubeEmbed
-                url={video.youtubeUrl}
-                coverImage={video.coverImage}
-                onPlay={onPlay.bind(this, i)}
-              />
-              <small style={{marginTop: 100, display: 'block', maxWidth: '20em'}}>
-                <PortableText blocks={video._rawCaption} />
-              </small>
-            </div>
-          ))}
-        </div>
-      </Container>
+      <h1 hidden>Videos</h1>
+      <div>
+        {videoNodes && videoNodes.map((video, i) => (
+          <Video video={video} onPlay={onPlay.bind(this, i)} key={`yt-${i}`} />
+        ))}
+      </div>
     </React.Fragment>
   )
 }

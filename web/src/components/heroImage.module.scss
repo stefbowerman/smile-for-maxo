@@ -1,6 +1,6 @@
 .el {
   height: 100vh;
-  padding: 50px 20px;
+  padding: 50px;
   opacity: 0;
 
   @media (min-width: 800px) {
@@ -19,4 +19,8 @@
   width: 100%;
   max-width: 100%;
   object-fit: contain;
+
+  @media (max-width: 599px) {
+    transform: translateY(-30px);
+  }
 }

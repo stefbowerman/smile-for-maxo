@@ -119,7 +119,7 @@ class Product extends React.Component {
       },
       loop: images.length > 1,
       watchOverflow: true,
-      slidesPerView: 3,
+      slidesPerView: 1,
       centeredSlides: true
     }
 
@@ -145,16 +145,14 @@ class Product extends React.Component {
           {
             maxWidth: 800,
             margin: '0 auto',
+            padding: '0 20px',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center'
           }
         }>  
-          <h4>
-            {product.title}
-          </h4>
-          <p>{formatPrice(product.priceRange.minVariantPrice.amount)}</p>
-          <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
+          <h4>{product.title}</h4>
+          <div>{formatPrice(product.priceRange.minVariantPrice.amount)}</div>
           {product.availableForSale ?
             <div>
               <select
@@ -189,6 +187,9 @@ class Product extends React.Component {
             :
             <h4>Sold Out</h4>
           }
+
+          <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
+
           {this.state.selectedVariantId && (
             <div style={ {fontSize: 11, fontFamilt: 'Courier', display: 'none'} }>{this.state.selectedVariantId}</div>
           )}

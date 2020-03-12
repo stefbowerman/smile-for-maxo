@@ -1,0 +1,23 @@
+.el {
+  margin-bottom: 150px;
+
+  @media (min-width: 800px) {
+    margin-bottom: 350px;
+  }
+}
+
+.title {
+  font-family: 'The Broadband';
+  text-align: center;
+  font-size: 90px;
+  line-height: 0.85;
+  margin-bottom: 40px;
+  font-weight: normal;
+}
+
+.caption {
+  font-size: 85%;
+  margin-top: 100px;
+  display: block;
+  max-width: 20em;
+}

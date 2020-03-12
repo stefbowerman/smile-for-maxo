@@ -86,7 +86,7 @@ class LilBigManBookSlideshow extends React.Component {
         <Swiper {...swiperParams}>
           {mainSlides}
         </Swiper>
-        <span class="status">{this.state.activeIndex} / 26</span>
+        <span className="status">{this.state.activeIndex} / 26</span>
       </div>
     )
   }

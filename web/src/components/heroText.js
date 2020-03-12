@@ -12,7 +12,7 @@ const HeroText = ({ text }) => {
 
   return (
     <div className={cn(styles.el, (mounted && styles.elMounted))} >
-      {text}
+      <span className={styles.text}>{text}</span>
     </div>
   )
 }
