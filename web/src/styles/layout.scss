@@ -13,6 +13,7 @@ html {
 
 body {
   -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
   background: var(--color-white);
   color: var(--color-black);
   margin: 0;
@@ -59,10 +60,14 @@ footer {
 
 button {
   background-color: white;
-  border: 1px solid black;
-  border-radius: 2px;
-  font-size: 13px;
-  padding: 8px 25px 9px;
+  border: none;
+  font-size: 1rem;
+  border-radius: 45px;
+  font-size: 16px;
+  padding: 8px 16px;
+  box-shadow: 0 2px 14px -7px #0000009c;
+  font-family: var(--font-family-sans);
+  cursor: pointer;
 }
 
 .swiper-pagination {
@@ -133,10 +138,13 @@ button {
   // }
 
   .status {
-    font-size: 13px;
     color: white;
     position: absolute;
-    bottom: 10px;
-    left: 10px;
+    z-index: 1;
+    bottom: 12px;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    justify-content: space-between;
   }
 }

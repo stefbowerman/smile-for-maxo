@@ -133,26 +133,17 @@ const IndexPage = props => {
         description={homePage.title || site.description}
         keywords={site.keywords}
       />
-      <h1 hidden>Welcome to {site.title}</h1>
+      <h1 hidden>{homePage.title || site.title}</h1>
+      
       {homePage.image && 
         <HeroImage image={homePage.image} />
       }
-      {homePage.video && homePage.video.youtubeUrl && (
-        <IndexContainer>
-          <Container>
-            <YouTubeEmbed
-              url={homePage.video.youtubeUrl}
-              coverImage={homePage.video.coverImage}
-            />
-          </Container>
-        </IndexContainer>
-      )}
+
       {albums && albums.map((album, i) => (
         <IndexContainer key={`album-${i}`}>
           <Album album={album} />
         </IndexContainer>
       ))}
-
 
       {/*
         postNodes && (

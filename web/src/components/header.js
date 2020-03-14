@@ -1,7 +1,6 @@
 import {Link, graphql, StaticQuery} from 'gatsby'
+import AniLink from "gatsby-plugin-transition-link/AniLink";
 import React from 'react'
-import Icon from './icon'
-import {cn} from '../lib/helpers'
 
 import styles from './header.module.css'
 
@@ -24,14 +23,14 @@ const Header = props => {
         <nav className={styles.nav}>
           <ul>
             <li>
-              <Link to='/'>Music</Link>
+              <AniLink fade to='/'>Music</AniLink>
             </li>          
             <li>
-              <Link to='/videos/'>Videos</Link>
+              <AniLink fade to='/videos/'>Videos</AniLink>
             </li>
             {hasProducts && 
               <li>
-                <Link to='/merch/'>Merch</Link>
+                <AniLink fade to='/merch/'>Merch</AniLink>
               </li>
             }
           </ul>

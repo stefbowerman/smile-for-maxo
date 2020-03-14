@@ -9,3 +9,32 @@
     display: none;
   }
 }
+
+.mobile-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'The Broadband';
+  font-size: 80px;
+  line-height: 0.85;
+  max-width: 100vw;
+  width: 100%;
+  padding: 0 25px;  
+  color: white;
+
+  @media (min-width: 600px) {
+    font-size: 90px;
+  }
+}
+
+.mobileWrapper {
+  display: flex;
+  margin: 0 -18vw 40px;
+  position: relative;
+
+  @media (min-width: 500px) {
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+}

@@ -6,6 +6,7 @@ class LilBigManBookScroller extends React.Component {
 
     this.left = 0;
     this.animationLoop = null;
+    this.animationDelayTimeout = null;
     this.scrollerRef = React.createRef();
 
     this.animationNudge = this.animationNudge.bind(this)
@@ -20,6 +21,7 @@ class LilBigManBookScroller extends React.Component {
 
   componentWillUnmount() {
     this.killAnimationLoop();
+    clearTimeout(this.animationDelayTimeout);
     document.removeEventListener('touchstart', this.handleTouchStart);
   }  
 
@@ -36,16 +38,17 @@ class LilBigManBookScroller extends React.Component {
     // }
 
     if (this.props.open) {
-      this.createAnimationLoop();
+      this.animationDelayTimeout = setTimeout(this.createAnimationLoop.bind(this), 600)
     }
     else {
+      clearTimeout(this.animationDelayTimeout)
       this.killAnimationLoop();
     }
   }
 
   animationNudge() {
     const el = this.scrollerRef.current;
-    this.left += 0.75;
+    this.left += 0.6;
     el.scrollLeft = this.left
 
     if((el.scrollWidth > el.offsetWidth) && (this.left >= (el.scrollWidth - el.offsetWidth))) {
@@ -96,23 +99,27 @@ class LilBigManBookScroller extends React.Component {
           height: '100%',
           width: '100%',
           backgroundColor: 'white',
-          zIndex: 10001,
+          zIndex: 100010,
           pointerEvents: (this.props.open ? 'auto' : 'none'),
           opacity: (this.props.open ? 1 : 0),
-          transition: 'opacity 300ms ease',
+          transition: 'opacity 1200ms ease',
           display: 'flex',
-          alignItems: 'center'
+          alignItems: 'center',
+          flexDirection: 'column',
+          overflow: 'hidden'
         }
       }>
         <div style={{
           padding: '0 20px',
           display: 'flex',
           justifyContent: 'space-between',
-          position: 'absolute',
+          alignItems: 'center',
           top: 0,
           left: 0,
           right: 0,
-          height: '7vh'
+          height: '7vh',
+          flex: 1,
+          width: '100%'
         }}>
           <span>Lil Big Man Book</span>
           <span onClick={() => {
@@ -121,10 +128,14 @@ class LilBigManBookScroller extends React.Component {
         </div>
         <div style={
           {
-            height: '86vh',
+            height: '93vh',
             display: 'flex',
             flexWrap: 'nowrap',
-            overflowX: 'scroll'
+            overflowX: 'scroll',
+            width: '100%'
+          }}
+          onClick={() => {
+            this.props.onCloseClick && this.props.onCloseClick()
           }}
           onMouseEnter={this.handleMouseEnter}
           ref={this.scrollerRef}

@@ -33,12 +33,10 @@ const Album = ({ album }) => {
     }
   }
 
-  const [visualGuideOpen, setVisualGuideOpen] = useState(false);
-
   return (
     <div>
       <Container>
-        <h3>"{album.name}"</h3>
+        <h3 className={styles.title}>{album.name}</h3>
         <div className={styles.top}>
           <div style={ {flex: 1} }>
             {album.coverImage && 
@@ -47,7 +45,9 @@ const Album = ({ album }) => {
           </div>
           <div style={ {flex: 1} }>
             <div className={styles.description}>
-              <PortableText blocks={album._rawDescription} />
+              <div hidden>
+                <PortableText blocks={album._rawDescription} />
+              </div>
               {links.length > 0 && 
                 <div>
                   Listen to "{album.name}" on
@@ -72,17 +72,16 @@ const Album = ({ album }) => {
         }>
           {album.images && album.images.map((image, j) => {
               return (
-                <SanityImage asset={image.asset} alt={image.alt} key={`album-i-${j}`} />
+                <div key={`album-i-${j}`}>
+                  <SanityImage asset={image.asset} alt={image.alt} />
+                </div>
               )
             })
           }
         </div>
       </Container>
       {slug === 'lil-big-man' && 
-        <div>
-          <LilBigManVisualGuide open={visualGuideOpen}/>
-          <button style={{display: 'none'}} onClick={() => setVisualGuideOpen(true)}>Show guide</button>
-        </div>
+        <LilBigManVisualGuide />
       }
     </div>
   )

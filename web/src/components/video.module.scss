@@ -1,23 +1,47 @@
 .el {
-  margin-bottom: 150px;
+  margin-bottom: 250px;
+  margin-left: auto;
+  margin-right: auto;  
 
   @media (min-width: 800px) {
     margin-bottom: 350px;
+    max-width: calc(100vh * 16/9);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
   }
 }
 
 .title {
   font-family: 'The Broadband';
   text-align: center;
-  font-size: 90px;
+  font-size: 70px;
   line-height: 0.85;
-  margin-bottom: 40px;
+  margin-bottom: 100px;
   font-weight: normal;
+
+  @media (min-width: 800px) {
+    font-size: 90px;
+    line-height: 0.85;
+  }  
 }
 
 .caption {
-  font-size: 85%;
+  font-size: 0.8125rem;
   margin-top: 100px;
   display: block;
   max-width: 20em;
+
+  @media (min-width: 800px) {
+
+  }
+}
+
+.embedContainer {
+  @media (min-width: 800px) {
+    // padding: 0 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
 }

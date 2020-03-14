@@ -4,7 +4,7 @@ import YouTubeEmbed from './youTubeEmbed'
 import Container from './container'
 import styles from './video.module.scss'
 
-const Video = ({ video, onPlay }) => {
+const Video = ({ video, onPlay, onPause, onEnd }) => {
 
   onPlay = onPlay || (() => {})
 
@@ -13,11 +13,15 @@ const Video = ({ video, onPlay }) => {
       <Container>
         <h3 className={styles.title}>&ldquo;{video.name}&rdquo;</h3>
       </Container>
-      <YouTubeEmbed
-        url={video.youtubeUrl}
-        coverImage={video.coverImage}
-        onPlay={onPlay}
-      />
+      <div className={styles.embedContainer}>
+        <YouTubeEmbed
+          url={video.youtubeUrl}
+          coverImage={video.coverImage}
+          onPlay={onPlay}
+          onPause={onPause}
+          onEnd={onEnd}
+        />
+      </div>
       <Container>
         <div className={styles.caption}>
           <PortableText blocks={video._rawCaption} />

@@ -24,6 +24,10 @@ const YouTubeEmbed = props => {
     props.onPlay && props.onPlay(e)
   }
 
+  const onPause = e => {
+    props.onPause && props.onPause(e)
+  }
+
   const onEnd = e => {
     setPlaying(false)
     setTextVisible(true);
@@ -78,6 +82,7 @@ const YouTubeEmbed = props => {
         videoId={getYouTubeId(props.url)}
         onReady={onReady}
         onPlay={onPlay}
+        onPause={onPause}
         onEnd={onEnd}
         opts={embedOptions}
       />        
@@ -90,6 +95,8 @@ export default YouTubeEmbed
 YouTubeEmbed.propTypes = {
   url: PropTypes.string.isRequired,
   onPlay: PropTypes.func,
+  onPause: PropTypes.func,
+  onEnd: PropTypes.func,
   coverImage: PropTypes.shape({
     asset: PropTypes.object,
     alt: PropTypes.string

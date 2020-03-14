@@ -34,11 +34,29 @@ const VideosPage = props => {
     )
   }
 
+  const playingVideoIndexes = [];
+
   const onPlay = (index) => {
-    console.log('playing!')
-    console.log(index);
-    document.body.style.backgroundColor = '#000'
+    // if (!playingVideoIndexes.includes(index)) {
+    //   playingVideoIndexes.push(index)
+    // }
+
+    // console.log(playingVideoIndexes);
+
+    // console.log('playing!')
+    // console.log(index);
+    // document.body.style.backgroundColor = '#000'
   }
+
+  const onPause = index => {
+    // console.log('pausing!')
+    // console.log(index);
+  }
+
+  const onEnd = index => {
+    // console.log('ended!')
+    // console.log(index);
+  }  
 
   const videoNodes = data && data.videos && mapEdgesToNodes(data.videos)
 
@@ -49,7 +67,13 @@ const VideosPage = props => {
       <h1 hidden>Videos</h1>
       <div>
         {videoNodes && videoNodes.map((video, i) => (
-          <Video video={video} onPlay={onPlay.bind(this, i)} key={`yt-${i}`} />
+          <Video
+            video={video}
+            onPlay={onPlay.bind(this, i)}
+            onPause={onPause.bind(this, i)}
+            onEnd={onEnd.bind(this, i)}
+            key={`yt-${i}`}
+          />
         ))}
       </div>
     </React.Fragment>

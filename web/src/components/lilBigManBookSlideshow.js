@@ -4,7 +4,7 @@ import 'swiper/css/swiper.min.css';
 
 const Slide = props => {
   return (
-    <div className="swiper-slide" style={{display: 'block', textAlign: 'center', padding: '100px'}}>
+    <div className="swiper-slide" style={{display: 'block', textAlign: 'center', padding: '100px', backgroundColor: 'black'}}>
       <div style={{display: 'flex', justifyContent: 'center', height: '100%'}}>
         {props.children}
       </div>
@@ -23,6 +23,7 @@ class LilBigManBookSlideshow extends React.Component {
     this.swiper = null;
     this.handleGetSwiper = this.handleGetSwiper.bind(this)
     this.handleSlideChange = this.handleSlideChange.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   handleGetSwiper(swiper) {
@@ -35,6 +36,10 @@ class LilBigManBookSlideshow extends React.Component {
     this.swiper && this.setState({
       activeIndex: this.swiper.realIndex+1
     })
+  }
+
+  handleClick(e) {
+    this.swiper && this.swiper.slideNext()
   }
 
   render() {
@@ -69,7 +74,8 @@ class LilBigManBookSlideshow extends React.Component {
 
     const swiperParams = {
       loop: true,
-      watchOverflow: true,
+      effect: 'fade',
+      watchOverflow: false,
       slidesPerView: 1,
       centeredSlides: true,
       navigation: {
@@ -77,16 +83,19 @@ class LilBigManBookSlideshow extends React.Component {
         prevEl: '.swiper-button-prev'
       },
       getSwiper: this.handleGetSwiper,
-      speed: 500
+      speed: 600
       // spaceBetween: 30
     }
 
     return (
-      <div className="lbm-slideshow">
+      <div className="lbm-slideshow" onClick={this.handleClick}>
         <Swiper {...swiperParams}>
           {mainSlides}
         </Swiper>
-        <span className="status">{this.state.activeIndex} / 26</span>
+        <div className="status">
+          <span>{this.state.activeIndex}</span>
+          <span>26</span>
+        </div>
       </div>
     )
   }
