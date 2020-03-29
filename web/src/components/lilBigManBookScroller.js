@@ -101,6 +101,8 @@ class LilBigManBookScroller extends React.Component {
           left: 0,
           height: '100%',
           width: '100%',
+          height: '100vh',
+          width: '100vw',
           backgroundColor: 'white',
           zIndex: 100010,
           pointerEvents: (this.props.open ? 'auto' : 'none'),
@@ -113,37 +115,25 @@ class LilBigManBookScroller extends React.Component {
         }
       }>
         <div style={{
-          padding: '0 20px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: '7vh',
-          flex: 1,
-          width: '100%'
-        }}>
-          <span>Lil Big Man Book</span>
-          <span onClick={() => {
-            this.props.onCloseClick && this.props.onCloseClick()
-          }}>Close</span>
-        </div>
-        <div style={
-          {
-            height: '93vh',
-            display: 'flex',
-            flexWrap: 'nowrap',
-            overflowX: 'scroll',
-            width: '100%'
-          }}
-          onClick={() => {
-            this.props.onCloseClick && this.props.onCloseClick()
+            height: '100%',
+            width: '100%',
+            overflowX: 'scroll'
           }}
           onMouseEnter={this.handleMouseEnter}
-          ref={this.scrollerRef}
+          ref={this.scrollerRef}          
         >
-          {bookImages}
+          <div style={
+            {
+              height: '100%',
+              display: 'flex',
+              flexWrap: 'nowrap'
+            }}
+            onClick={() => {
+              this.props.onCloseClick && this.props.onCloseClick()
+            }}
+          >
+            {bookImages}
+          </div>
         </div>
       </div>
     )

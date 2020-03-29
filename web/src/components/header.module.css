@@ -3,7 +3,7 @@
 
 .root {
   position: relative;
-  z-index: 100;
+  z-index: 1;
 /*  mix-blend-mode: difference;
   color: white;*/
 }
