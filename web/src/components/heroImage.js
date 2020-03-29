@@ -1,20 +1,21 @@
 import React, { useState } from 'react'
 import PropTypes from "prop-types"
+import Img from "gatsby-image/withIEPolyfill"
 import SanityImage from './sanityImage'
 import { cn } from '../lib/helpers'
-import styles from './heroImage.module.scss'
+import styles from './heroImage.module.css'
 
 const HeroImage = ({ image }) => {
-  const [ready, setReady] = useState(true) // useState(false)
+  const [ready, setReady] = useState(false)
 
   return (
     <div className={cn(styles.el, (ready && styles.elReady))} >
-      <SanityImage
-        asset={image.asset}
+      <Img
+        fluid={image.asset.fluid}
+        objectFit="contain"
         alt={image.alt}
-        className={styles.image}
         onLoad={() => {
-          // setReady(true)
+          setReady(true)
         }}
       />
     </div>

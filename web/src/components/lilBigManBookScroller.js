@@ -1,5 +1,7 @@
 import React from 'react'
 
+// @TODO - Just make this 100vh and let people close by tapping, skip the title at the top
+
 class LilBigManBookScroller extends React.Component {
   constructor(props) {
     super(props)
@@ -38,6 +40,7 @@ class LilBigManBookScroller extends React.Component {
     // }
 
     if (this.props.open) {
+      // @TODO - Need to check if the current scroll left is 0, if not then skip the loop
       this.animationDelayTimeout = setTimeout(this.createAnimationLoop.bind(this), 600)
     }
     else {

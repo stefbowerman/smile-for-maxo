@@ -131,6 +131,8 @@ class Product extends React.Component {
   render() {
     const product = this.props.product
 
+    console.log(product.images)
+
     return (
       <div className={styles.el}>
         <ProductSlideshow product={product} isMobile={this.state.isMobile} />

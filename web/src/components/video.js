@@ -6,6 +6,8 @@ import styles from './video.module.scss'
 
 const Video = ({ video, onPlay, onPause, onEnd }) => {
 
+  // @TODO - Wait until the cover image loads in and *then* fade in the entire video component?
+
   onPlay = onPlay || (() => {})
 
   return (

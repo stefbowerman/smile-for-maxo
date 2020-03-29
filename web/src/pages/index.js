@@ -14,9 +14,9 @@ import GraphQLErrorList from '../components/graphql-error-list'
 import SEO from '../components/seo'
 import Product from '../components/product'
 import Album from '../components/album'
-import SanityImage from '../components/sanityImage'
-import YouTubeEmbed from '../components/youTubeEmbed'
-import Container from '../components/container'
+// import SanityImage from '../components/sanityImage'
+// import YouTubeEmbed from '../components/youTubeEmbed'
+// import Container from '../components/container'
 import HeroImage from '../components/heroImage'
 
 export const query = graphql`
@@ -31,18 +31,12 @@ export const query = graphql`
       title
       description
       image {
-        ...SanityImage
+        asset {
+          fluid(maxWidth: 1500) {
+            ...GatsbySanityImageFluid
+          }
+        }        
         alt
-      }
-      video {
-        name
-        youtubeUrl
-        releaseDate
-        _rawCaption
-        coverImage {
-          ...SanityImage
-          alt
-        }
       }
     }
     albums: allSanityAlbum(sort: {order: DESC, fields: releaseDate}){
@@ -55,12 +49,20 @@ export const query = graphql`
             current
           }
           coverImage {
-            ...SanityImage
             alt
+            asset {
+              fluid(maxWidth: 1500) {
+                ...GatsbySanityImageFluid
+              }
+            }
           }
           images {
-            ...SanityImage
-            alt 
+            alt
+            asset {
+              fluid(maxWidth: 1500) {
+                ...GatsbySanityImageFluid
+              }
+            }
           }
           links {
             appleMusic
@@ -129,7 +131,6 @@ const IndexPage = props => {
   return (
     <React.Fragment>
       <SEO
-        title={homePage.title || site.title}
         description={homePage.title || site.description}
         keywords={site.keywords}
       />

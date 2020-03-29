@@ -5,14 +5,23 @@ import styles from './heroText.module.scss'
 
 const HeroText = ({ text }) => {
   const [mounted, setMounted] = useState(false)
+
+  // code to run on component mount
   useEffect(() => {
-    // code to run on component mount
-    setMounted(true)
+    setTimeout(() => {
+      setMounted(true)  
+    }, 1000);
   }, []);
 
   return (
     <div className={cn(styles.el, (mounted && styles.elMounted))} >
-      <span className={styles.text}>{text}</span>
+      <span className={styles.text}>
+        {
+          text.split('').map(char => (
+            <span className={cn(styles.character, (mounted && styles.showCharacter))}>{char}</span>
+          ))
+        }
+      </span>
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Img from 'gatsby-image'
 import {
   mapEdgesToNodes,
   filterOutDocsWithoutSlugs,
@@ -38,12 +39,15 @@ const Album = ({ album }) => {
       <Container>
         <h3 className={styles.title}>{album.name}</h3>
         <div className={styles.top}>
-          <div style={ {flex: 1} }>
+          <div className={cn(styles.topBlock, styles.topBlockCover)}>
             {album.coverImage && 
-              <SanityImage asset={album.coverImage.asset} alt={album.coverImage.alt} />
+              <Img
+                fluid={album.coverImage.asset.fluid}
+                alt={album.coverImage.alt}
+              />
             }
           </div>
-          <div style={ {flex: 1} }>
+          <div className={cn(styles.topBlock, styles.topBlockDescription)}>
             <div className={styles.description}>
               <div hidden>
                 <PortableText blocks={album._rawDescription} />
@@ -52,11 +56,9 @@ const Album = ({ album }) => {
                 <div>
                   Listen to "{album.name}" on
                   <ul>
-                    {links.map((link, k) => {
-                        return (
-                          <li key={`album-link-${k}`}>{link}</li>
-                        )
-                      })
+                    {links.map((link, k) => (
+                        <li key={`album-link-${k}`}>{link}</li>
+                      ))
                     }
                   </ul>
                 </div>
@@ -64,21 +66,22 @@ const Album = ({ album }) => {
             </div>
           </div>
         </div>
-        <div style={
-          {
-            display: 'flex',
-            justifyContent: 'flex-end'
-          }
-        }>
-          {album.images && album.images.map((image, j) => {
-              return (
-                <div key={`album-i-${j}`}>
-                  <SanityImage asset={image.asset} alt={image.alt} />
-                </div>
-              )
-            })
-          }
-        </div>
+        {album.images && (
+          <div className={styles.extraImages}>
+            {
+              album.images.map((image, j) => (
+                <div className={styles.imageBlock} key={`album-i-${j}`}>
+                  <div>
+                    <Img
+                      fluid={image.asset.fluid}
+                      alt={image.alt}
+                    />                  
+                  </div>
+                </div>              
+              ))
+            }
+          </div>
+        )}
       </Container>
       {slug === 'lil-big-man' && 
         <LilBigManVisualGuide />

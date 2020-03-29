@@ -16,8 +16,12 @@ export const query = graphql`
           releaseDate
           _rawCaption
           coverImage {
-            ...SanityImage
             alt
+            asset {
+              fluid(maxWidth: 1500) {
+                ...GatsbySanityImageFluid
+              }
+            }            
           }
         }
       }

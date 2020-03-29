@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import getYouTubeId from 'get-youtube-id'
 import YouTube from 'react-youtube'
 import PropTypes from "prop-types"
+import Img from 'gatsby-image'
 import { cn } from '../lib/helpers'
 import styles from './youTubeEmbed.module.scss'
 import SanityImage from './sanityImage'
@@ -10,7 +11,7 @@ const YouTubeEmbed = props => {
   const [player, setPlayer] = useState(null)
   const [playerReady, setPlayerReady] = useState(false)
   const [playing, setPlaying] = useState(false)
-  const [coverLoaded, setCoverLoaded] = useState(true) // useState(false)
+  const [coverLoaded, setCoverLoaded] = useState(false)
   const [textVisible, setTextVisible] = useState(true)
 
   const onReady = (e) => {
@@ -69,12 +70,13 @@ const YouTubeEmbed = props => {
           } }    
         >
           <span className={cn(styles.coverText, (textVisible && styles.coverTextVisible))}>Watch</span>
-          <SanityImage
-            asset={props.coverImage.asset}
+          <Img 
+            fluid={props.coverImage.asset.fluid}
             className={styles.coverImage}
             alt={props.coverImage.alt}
-            // onLoad={onCoverDone}
+            onLoad={onCoverDone}
             onError={onCoverDone}
+            className={styles.coverImage}
           />
         </div>
       }

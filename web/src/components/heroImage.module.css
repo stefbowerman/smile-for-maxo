@@ -3,10 +3,9 @@
   padding: 100px 50px;
   opacity: 0;
 
-  // @media (min-width: 800px) {
-  //   padding-top: 100px;
-  //   padding-bottom: 100px;
-  // }
+  @nest & > div {
+    height: 100%; // @TODO - :-/
+  }
 }
 
 .elReady {
@@ -19,8 +18,10 @@
   width: 100%;
   max-width: 100%;
   object-fit: contain;
+}
 
-  @media (max-width: 599px) {
+@media (max-width: 599px) {
+  .image {
     transform: translateY(-30px);
   }
 }

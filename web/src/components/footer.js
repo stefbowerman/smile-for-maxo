@@ -24,12 +24,24 @@ const Footer = props => {
   return (
     <footer>
       {
+        pathname == '/' && 
+        <img src={`/handwritten-text-2-web.jpg`} className={styles.handwriting} />
+      }
+      {
         pathname !== '/' && 
         <Link to="/" className={styles.homeLink}>
-          <button>Go Home</button>
+          <button>
+            <span style={{ display: 'inline-block', paddingRight: 11, position: 'relative', top: 1 }}>
+              &larr;
+            </span>
+            Go Home
+          </button>
         </Link>
       }
-      <nav>
+      <Link to="/">
+        <img className={styles.logo} src={`/logo-small-trans.png`} />
+      </Link>      
+      <nav className={styles.nav}>
         <ul>
           {instagramLink &&
             <li>
@@ -48,9 +60,6 @@ const Footer = props => {
           }   
         </ul>
       </nav>
-      <Link to="/">
-        <img className={styles.logo} src={`/logo-small-trans.png`} />
-      </Link>
     </footer>
   )
 }
